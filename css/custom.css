@@ -1,0 +1,93 @@
+#searchform{
+	display: inline-block;
+}
+
+.selected{
+	border: 1px dashed #B61E2E;
+}
+
+#searchbox{
+	margin-top: 20px;
+	width: 50%;
+	margin-left:23%;
+	margin-right:auto;
+}
+
+#header ul{
+	list-style-type:none;
+}
+#header li{
+	display:inline;
+	padding-right: 50px;
+}
+#header{
+	position:absolute;
+	text-align: right;
+	height: 18px;
+	top:0px;
+	width:100%;
+	background-color:#B61E2E;
+}
+#comparebox{
+	border-top: 1px solid black;
+	vertical-align:text-top;
+	background:white;
+	height:23px;
+	position:fixed;
+	width: 100%;
+	bottom:19px;
+}
+#gradeboxes{
+	border-top: 1px solid black;
+	width: 100%;
+	min-height:15px;
+	background-color: #CDCDCD;
+	font-size:8px;
+	color: #FFFFFF;
+	position:fixed;
+	bottom:0;
+}
+#resultcount {
+	text-align: center;
+	font-size:12px;
+	font-weight:bold;
+	font-color:#7D7D73;
+}
+#gradeboxes thead th{
+	background-color: #B61E2E;
+	border-bottom: 1px solid black;
+	border-right: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+#gradeboxes thead{
+	border-bottom: 1px solid #FFF;
+	border: 1px solid #FFF;
+}
+
+#gradeboxes tbody tr td{
+	font-weight:bold;
+	font-size: 12px;
+	text-align: center;
+	background-color:#7D7D73
+}
+
+#searchresults{
+	margin-top: 15px;
+	margin-left:25%;
+	margin-right:15px;
+	height:100%;
+	min-height:30%;
+	border:1px solid #DDDDDD;
+}
+#graphing{
+	margin-top:15px;
+	margin-left:0px;
+	width:20%;
+	height:30%;
+	top: 0px;
+	position:absolute;
+}
+#contents{
+	width: 75%;
+}

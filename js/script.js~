@@ -1,0 +1,226 @@
+$(document).ready( function(){
+		"use strict";
+		console.log("Creating slider")
+		$('#rangeslider').slider({
+range: true,
+max: 2014,
+min: 2000,
+values: [2007, 2014],
+slide: function( event, ui){
+$('#from').html(ui.values[0]);
+$('#to').html(ui.values[1]);
+}
+});
+
+		//Enable table sortering
+		$('#searchresults').tablesorter(); 
+		var curresults = [];
+		var curgpas = [];
+
+		$('#form').submit(function(f){
+			curresults = [];
+			f.preventDefault();
+
+			var from = $('#from').html();
+			var to = $('#to').html();
+
+			var res = $('#searchresults tbody');
+
+			var appendthis = '';	
+			$.ajax({
+type:'GET',
+url:'php/getClasses.php',
+contentType:'application/json',
+data: $('#form').serialize()+'&from='+from+'&to='+to,
+success: function(data){
+var i=0;
+$.each(data, function(index, e){
+	var namesh = e['NameShort'];
+	var sec = e['Section'];
+	var year = e['Year'];
+	var avggpa = e['avggpa'];
+	var num = e['number'];
+	var inst = e['name'];
+	var title = e['Title'];
+	var cid = e['cid'];
+	curgpas[i] = e['avggpa'];
+
+	appendthis = appendthis+'<tr id='+cid+'><td>'+
+	namesh+'</td><td>'+
+	num+'</td><td>'+
+	sec+'</td><td>'+
+	year+'</td><td>'+
+	inst+'</td><td>'+
+	avggpa+'</td><td>'+
+	title+'</td><td>'+
+	'</tr>';
+	i++;
+});
+
+res.html(appendthis);
+$('#searchresults').trigger('update');
+}
+});
+
+var sum =0;
+for(var i=0; i<curgpas.length; i++){
+	sum += curgpas[i];
+}
+
+var avg = (sum+0.0)/curgpas.length;
+
+$('#gradegauge').highcharts({
+chart:{
+type:'gauge',
+plotBackgroundColor:null,
+plotBackgroundImage:null,
+plotBorderWidth:0,
+plotShadow:false
+},
+
+title: {
+text: 'Grade Gauge'
+},
+
+pane: {
+startAngle: -150,
+endAngle: 150,
+background: [{
+backgroundColor: {
+linearGradient: {x1:0,y1:0,x2:0,y2:1},
+stops:[
+[0,'#FFF'],
+[1,'#333']
+	]
+		 },
+borderWidth:0,
+	    outerRadius: '109%'
+},{
+backgroundColor:{
+linearGradient:{x1:0,y1:0,x2:0,y2:1},
+	       stops:[
+		       [0,'#333'],
+	       [1,'#FFF']
+		       ]
+		},
+borderWidth:1,
+	    outerRadius: '107%'
+}]
+},
+
+
+yAxis: {
+min: 0,
+     max: 4,
+     minorTickInterval: 'auto',
+     minorTickWidth: 1,
+     minorTickLength: 10,
+     minorTickPosition: 'inside',
+     minorTickColor: '#666',
+
+     tickPixelInterval: 30,
+     tickWidth: 2,
+     tickPosition: 'inside',
+     tickLength: 10,
+     tickColor: '#666',
+     labels: {
+step: 2,
+      rotation: 'auto'
+     },
+title: {
+text: 'GPA'
+       },
+plotBands: [{
+from: 0,
+      to: 2,
+      color: '#DF5353' // green
+	   }, {
+from: 2,
+      to: 3,
+      color: '#DDDF0D' // yellow
+	   }, {
+from: 3,
+      to: 4,
+      color: '#55BF3B' // red
+	   }]        
+       },
+
+series: [{
+name: 'GPA',
+      data: [avg],
+      tooltip: {
+valueSuffix: ' gpa'
+      }
+	}]
+
+}, 
+	function (chart) {}
+	});
+
+var alldepts = [];
+
+var somedepts = [];
+var allinst = [];
+var someinst = [];
+var someclass = [];
+
+$.ajax({
+type: "POST",
+url: "php/getDepts.php",
+dataType: "json",
+success: function(data){
+$.each(data, function(index, element){
+	alldepts.push(element.NameShort);
+	});
+$('#dept').autocomplete({
+source: alldepts
+});
+}
+});
+
+$.ajax({
+type: "POST",
+url: "php/getInst.php",
+dataType: "json",
+success: function(data){
+$.each(data, function(index, element){
+	allinst.push(element.name);
+	});
+$('#inst').autocomplete({
+source: allinst
+});
+}
+});
+
+$('#dept').blur( function(){
+		var value = $('#dept').val();
+		if ($.inArray(value, alldepts) > -1){
+		$.ajax({
+type: 'GET',
+url:  'php/getInstByDept.php',
+contentType: 'application/json',
+data: {dept:value},
+success: function (data){
+someinst = [];
+$.each(data, function(index, element){
+	someinst.push(element.name);
+	});
+$('#inst').autocomplete({
+source:someinst
+});
+}
+});
+		}else{
+		//if something is in the array that isn't in the dept list
+		//reset the list to everything
+			if(someinst.length > 0){
+				someinst = [];
+				$('#inst').autocomplete({
+source:allinst
+});
+}
+}
+});
+});
+});
+
