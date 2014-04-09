@@ -1,5 +1,17 @@
+var gage = new JustGage({
+	id:'avggpagage',
+        value:0.0,
+	min:0.0,
+	max:4.0,
+	title:'Average Gpa',
+	levelColorsGradient: false,
+	levelColors: [ "#FF1100", "#EEFF00", "#11FF00"],
+	counter: true,
+	label: 'GPA'
+});
 var data = {
 	manager : new GradeDist(),
+	gage    : gage	
 };
 
 $(document).ready( function(){	
@@ -19,7 +31,12 @@ $(document).ready( function(){
 	source: data.manager.getDeptNames(),
 	delay : 0
     });
-    
+
+    $('#directions').click(function(){
+
+		$('#directions').remove();
+		$('#comparebox').css('height',0);
+	});    
     $('#inst').keyup(function(){
 	var dept = $('#dept').val();
 	var inst = $('#inst').val();
@@ -36,7 +53,6 @@ $(document).ready( function(){
     $('#dept').blur( function(){
     });
 
-//Reinsert Graph
     console.log('Ready Function Complete');
 });
 
@@ -121,9 +137,10 @@ function searchandpopulate(ids,data){
     res.html("");
     res.html(appendthis);
     
-    var result = (curgpas/sumstudents).toFixed(2);
+    var result = (curgpas/((.0+sumstudents))).toFixed(2);
     if(isNaN(result)){result = 0;}
-    
+    data.gage.refresh(result);
+
     setclassrows();
     $('#searchresults').trigger('update');
     var data = count+' results';

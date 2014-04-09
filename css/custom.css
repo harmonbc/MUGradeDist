@@ -77,8 +77,10 @@
 	margin-left:25%;
 	margin-right:15px;
 	height:100%;
+	margin-bottom:23px;
 	min-height:30%;
 	border:1px solid #DDDDDD;
+	position: relative;
 }
 #graphing{
 	margin-top:15px;
