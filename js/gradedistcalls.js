@@ -37,7 +37,6 @@ function GradeDist(){
     };
 
     this.getAllInst = function(){
-	if(this.allinst.length > 0) return this.allinst;
 	var allinst = [];
 	$.ajax({
 	    type: urls.t.POST,
@@ -49,8 +48,7 @@ function GradeDist(){
 		});
 	    }
 	});
-	data.allinst = allinst;
-	return this.allinst;
+	return allinst;
     };
     
     this.getInstInDept = function(did){

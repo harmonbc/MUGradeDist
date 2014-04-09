@@ -1,4 +1,3 @@
-//Static method to store global data
 var data = {
 	manager : new GradeDist(),
 };
@@ -13,7 +12,7 @@ $(document).ready( function(){
 	ga('send','event','search');
 	f.preventDefault();
 	var ids = validateform();
-	if( ids != null) searchandpopulate(ids); 
+	if( ids != null) searchandpopulate(ids,data); 
     });
 
     $('#dept').autocomplete({
@@ -38,7 +37,6 @@ $(document).ready( function(){
     });
 
 //Reinsert Graph
-);
     console.log('Ready Function Complete');
 });
 
@@ -95,7 +93,7 @@ function validateform(){
 }
 
 
-function searchandpopulate(ids){
+function searchandpopulate(ids,data){
     years = fetchyears();
     result = data.manager.query($('#form').serialize()+
 			    '&from='+years['from']+
