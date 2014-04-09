@@ -69,7 +69,7 @@
 	font-weight:bold;
 	font-size: 12px;
 	text-align: center;
-	background-color:#7D7D73
+	background-color:#7D7D73;
 }
 
 #searchresults{
@@ -84,10 +84,53 @@
 	margin-top:15px;
 	margin-left:0px;
 	width:20%;
-	height:30%;
+	height:20%;
 	top: 0px;
 	position:absolute;
 }
 #contents{
 	width: 75%;
+}
+
+/* css formats for the gauge */
+.gauge .domain {
+    stroke-width: 2px;
+    stroke: #B61E2E;
+}
+
+.gauge .tick line {
+    stroke: #7D7D73;
+    stroke-width: 2px;
+}
+
+.gauge line {
+    stroke: #fff;
+}
+
+.gauge .arc, .gauge .cursor {
+    opacity: 0;
+}
+
+.gauge .major {
+    fill: #7D7D73;
+    font-size: 12px;
+    font-family: 'Play', verdana, sans-serif;
+    font-weight: normal;
+}
+
+.gauge .indicator {
+    stroke: #EE3311;
+    fill: #000;
+    stroke-width: 4px;
+}
+
+/* css formats for the segment display */
+.segdisplay .on {
+    fill:  #B61E2E;
+    
+}
+
+.segdisplay .off {
+    fill:  #B61E2E;
+    opacity: 0.15;
 }
