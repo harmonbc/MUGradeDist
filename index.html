@@ -20,65 +20,69 @@
 	<li><em>Beta Version 0.6</em>
 	</ul>
     </div>
-    <div id="searchbox">
-      <form class="form-inline" id="form" role="form" action="">
-	<div id="dept-group" class="form-group">
-	  <label>Dept</label>
-	  <input name="dept" id="dept"
-		 class="form-group" size="3" placeholder="ISA">
-	  <span class="help" id="depthelp"></span>
+    <div id="maincontent">
+	    <div id="topcontent">
+		    <div id="searchbox">
+		      <form class="form-inline" id="form" role="form" action="">
+			<div id="dept-group" class="form-group">
+			  <label>Dept</label>
+			  <input name="dept" id="dept"
+				 class="form-group" size="3" placeholder="ISA" autocomplete="off">
+			  <span class="help" id="depthelp"></span>
+			</div>
+		
+			<div id="num-group" class="form-group">
+			  <label>Class #</label>
+			  <input type="text" name="num" id="num" size="3" class="form-group" placeholder="406" autocomplete="off">
+			  <span class="help"></span>
+			</div>
+		
+			<div id="inst-group" class="form-group">
+			  <label>Instructor</label>
+			  <input type="text" name="inst" id="inst" class="form-control" placeholder="Rajkumar" autocomplete="off">
+			  <span class="help" id="insthelp"></span>
+			</div>
+			<!--Slider Bar-->
+		      <div id="rangedval">
+		        Year Range: <span id="from">2007</span> to <span id="to">2014</span>
+		      </div>
+		      <div id="rangeslider"></div>
+		      <input type="submit" name="submit" class="button" id="formsubmit" value="Submit"></input>
+		    </form>
+		    </div>
+
+		    <!--Container for the graphs-->
+		    <div id="graphing">
+			<div id="avggpagage"></div>
+			<div id="resultcount"></div>
+		    </div>
+		    <!--Container for the search results-->
+		    <div id="contents">
+		    <table id="searchresults" class="tablesorter">
+			<thead><tr><th>Dept</th><th>Class #</th><th>Section</th><th>Year</th><th>Instructor</th>
+			<th>Title</th><th>Avg Gpa</th></thead>
+			<tbody>
+			</tbody>
+		    </table>
+		
+	</div> <!--END TOP DIV-->
+	<div id="bottomcontent">
+	    <!--Fixed grade bar at bottom of screen-->
+			<div id="comparebox"><span id="directions">Click on a row to add it to the comparison bar, click again to remove (click this to remove directions)</span>	
+				<table id="gradeboxes">
+					<thead>
+						<th>Dept</th><th>#</th><th>Sec</th><th>Year</th><th>Semester</th>
+						<th>A+</th><th>A</th><th>A-</th><th>B+</th><th>B</th><th>B-</th>
+						<th>C+</th><th>C</th><th>C-</th><th>D+</th><th>D</th><th>D-</th>
+						<th>F</th><th>W</th><th>WP</th><th>WF</th><th>Total</th><th>Completed</th>
+						<th>AvgGpa</th><th>Title</th>
+						</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+	 </div>
 	</div>
-
-	<div id="num-group" class="form-group">
-	  <label>Class #</label>
-	  <input type="text" name="num" id="num" size="3" class="form-group" placeholder="406">
-	  <span class="help"></span>
-	</div>
-
-	<div id="inst-group" class="form-group">
-	  <label>Instructor</label>
-	  <input type="text" name="inst" id="inst" class="form-control" placeholder="Rajkumar">
-	  <span class="help" id="insthelp"></span>
-	</div>
-	<!--Slider Bar-->
-      <div id="rangedval">
-        Year Range: <span id="from">2007</span> to <span id="to">2014</span>
-      </div>
-      <div id="rangeslider"></div>
-      <input type="submit" name="submit" class="button" id="formsubmit" value="Submit"></input>
-    </form>
-    </div>
-
-
-
-    <!--Container for the graphs-->
-    <div id="graphing">
-	<div id="avggpagage"></div>
-	<div id="resultcount"></div>
-    </div>
-    <!--Container for the search results-->
-    <div id="contents">
-    <table id="searchresults" class="tablesorter">
-	<thead><tr><th>Dept</th><th>Class #</th><th>Section</th><th>Year</th><th>Instructor</th>
-	<th>Title</th><th>Avg Gpa</th></thead>
-	<tbody>
-	</tbody>
-    </table>
-
-    <!--Fixed grade bar at bottom of screen-->
-	<div id="comparebox"><span id="directions">Click on a row to add it to the comparison bar, click again to remove (click this to remove directions)</span>
-	<table id="gradeboxes">
-	<thead>
-		<th>Dept</th><th>#</th><th>Sec</th><th>Year</th><th>Semester</th>
-		<th>A+</th><th>A</th><th>A-</th><th>B+</th><th>B</th><th>B-</th>
-		<th>C+</th><th>C</th><th>C-</th><th>D+</th><th>D</th><th>D-</th>
-		<th>F</th><th>W</th><th>WP</th><th>WF</th><th>Total</th><th>Completed</th>
-		<th>AvgGpa</th><th>Title</th>
-	</thead>
-	<tbody></tbody>
-	</table>
-	</div>
-    </div>
 	<!-- LOAD JQUERY -->
   	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
