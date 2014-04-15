@@ -1,4 +1,7 @@
 /**
+ * This was not written by @harmonbc, so don't worry about this either
+ **/
+/**
  * JustGage - a handy JavaScript plugin for generating and animating nice & clean dashboard gauges.
  * Copyright (c) 2012 Bojan Djuricic - pindjur(at)gmail(dot)com | http://www.madcog.com
  * Licensed under MIT.
