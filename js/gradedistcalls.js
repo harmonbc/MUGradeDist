@@ -1,3 +1,8 @@
+/**
+ * This is a class that encapsulates all calls made to any PHP function.
+ * The calls use AJAX (http://www.w3schools.com/ajax/default.ASP), to return
+ * information about the class data
+ **/
 function GradeDist(){
     var urls = {
 	dt : {
@@ -17,6 +22,9 @@ function GradeDist(){
 	getPartialInst: "php/getInstPartial.php"
     };
 
+	/**This gets called when a user is typing into a box and
+	 * attempts to autocomplete the professor's name
+	 **/
     this.getPartialInst = function(partname, did){
 	var someinst = [];
 	did = this.getDID(did);
@@ -36,7 +44,8 @@ function GradeDist(){
 	return someinst;
     };
 
-    this.getAllInst = function(){
+    /**Returns a list of all insturctors. Not currently used*/
+    /*this.getAllInst = function(){
 	var allinst = [];
 	$.ajax({
 	    type: urls.t.POST,
@@ -49,9 +58,12 @@ function GradeDist(){
 	    }
 	});
 	return allinst;
-    };
+    };*/
     
-    this.getInstInDept = function(did){
+    /**This returns a list of all instructors in a given department
+     * Not currently used
+     **/
+    /*this.getInstInDept = function(did){
 	var instsindept = [];
 	$.ajax({
             type: urls.t.GET,
@@ -65,8 +77,10 @@ function GradeDist(){
             }
         });
 	return instsindept;
-    };
+    };*/
 
+    
+    /**Given an instructor name, it will return the ID*/
     this.getIID = function(name){
 	var iid = -1;
 	$.ajax({
@@ -84,6 +98,7 @@ function GradeDist(){
 	return iid;
     };
 
+    /**Returns a list of all department names*/
     this.getDeptNames = function(){
 	var deptlist = [];
 	$.ajax({
@@ -100,6 +115,7 @@ function GradeDist(){
 	return deptlist;
     };
     
+    /**Given the abbreviation for the department this will return the ID*/
     this.getDID = function(nameShort){
 	var did = -1;
 	$.ajax({
@@ -119,6 +135,8 @@ function GradeDist(){
 	return did;
     };
     
+    /**This function is called when the search button is pressed, it returns
+     * a list of all relevant classes*/
     this.query = function(params){
 	var result;
 	$.ajax({
