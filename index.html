@@ -3,6 +3,7 @@
   <head>
       	<meta charset="utf-8">
       	<title>MU Grade Dist</title>
+      	<!--Load all of the style sheets-->
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
       	<link rel="stylesheet" href="css/custom.css"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -12,6 +13,7 @@
 
   <body>
 
+    <!-- header bar that holds contact information -->
     <div id="header">
 	<ul>
 	<li><a href="help.html">Help</a> 
@@ -20,9 +22,12 @@
 	<li><em>Beta Version 0.6</em>
 	</ul>
     </div>
+    <!-- This container holds all content -->
     <div id="maincontent">
+        <!-- This container holds the searching functionality-->
 	    <div id="topcontent">
 		    <div id="searchbox">
+		    <!--Form for searching stuff-->
 		      <form class="form-inline" id="form" role="form" action="">
 			<div id="dept-group" class="form-group">
 			  <label>Dept</label>
@@ -83,12 +88,18 @@
 
 	 </div>
 	</div>
-	<!-- LOAD JQUERY -->
+	<!-- LOAD JQUERY We use JQuery to drive the structure of the program in order to access
+	the elements more easily-->
   	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  	<!-- This is used to import some features that make the page more appealing... like a bananna-->
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<!--This is the script that sorts the table-->
 	<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+	<!--The following 2 scripts are used by justgage to display the graph on the left-->
 	<script type="text/javascript" src="js/raphael.2.1.0.min.js"></script>
 	<script type="text/javascript" src="js/justgage.js"></script>
+	
+	<!--Next 3 scripts are custom made scripts for the project-->
 	<script type="text/javascript" src="js/gradedistcalls.js"></script>
         <script type="text/javascript" src="js/graphs.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
@@ -99,6 +110,7 @@
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+        //Register this page for Google Analytics
 		  ga('create', 'UA-49491790-2', 'miamioh.edu');
 		  ga('require', 'displayfeatures');
 		  ga('send', 'pageview');
