@@ -1,4 +1,8 @@
 <?php
+"""
+	This page receives all of the form information and returns a JSON list of classes
+"""
+	
 $data = array(
                 "DEPARTMENT"=>$_GET['dept'],
                 "CLASS_NO"=>$_GET['num'],
@@ -34,9 +38,6 @@ $getClasses = $getClasses." AND year <= ".$data["TO_YEAR"]." ORDER BY c.number L
 
 $db = new SQLite3('../db/grades.db');                        
 $db -> busyTimeout(5000);
-#$inputStats = sprintf("INSERT INTO stats(ip, dept, class, instructor,fromyear,toyear) VALUES ('%s','%s','%s','%s','%s','%s')",
-#	$_SERVER['REMOTE_ADDR'],$data['DEPARTMENT'],$data['CLASS_NO'],$data['INSTRUCTOR'],$data['FROM_YEAR'],$data['TO_YEAR']);
-#$db -> exec($inputStats);
 
 $result = $db -> query($getClasses);
 
@@ -46,6 +47,7 @@ while($res = $result -> fetchArray(SQLITE3_ASSOC)){
   $row[$i] = $res;
   $i++;
 }
+
 $db ->close();
 unset($db);
 header('Content-Type: application/json');
