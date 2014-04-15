@@ -1,7 +1,7 @@
 <?php
-"""
+/*
 	This page receives all of the form information and returns a JSON list of classes
-"""
+*/
 	
 $data = array(
                 "DEPARTMENT"=>$_GET['dept'],
