@@ -106,11 +106,13 @@ function validateform(){
 
     if($('#dept').val() != ""){
 	ids['did'] = data.manager.getDID($('#dept').val());
-	if(ids['did'] == null) return null;
+	//Should not handle wrong department
+	if(ids['did'] == null){}//Throw Error
     }
     
     if($('#inst').val() != ""){
         ga('send','event','instquery',$('#inst').val());
+        //Will do best effort for the Instructor ID
 	ids['iid'] = data.manager.getIID($('#inst').val());
     }
 
