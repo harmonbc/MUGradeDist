@@ -10,7 +10,8 @@ $data = array(
                 "FROM_YEAR"=>$_GET['from'],
                 "TO_YEAR"=>$_GET['to'],
 		"DID"=>$_GET['did'],
-		"IID"=>$_GET['iid']
+		"IID"=>$_GET['iid'],
+		"SEM"=>$_GET['sem']
         );
 
 $getClasses = sprintf("SELECT D.NameShort, I.iid, I.name, C.*, G.avggpa, G.finished FROM 
@@ -20,6 +21,9 @@ $getClasses = sprintf("SELECT D.NameShort, I.iid, I.name, C.*, G.avggpa, G.finis
                   grades as g on g.cid = c.cid
                   WHERE year >= %s ", $data['FROM_YEAR']);
 
+if($data['SEM'] != ""){
+  $getClasses = sprintf($getClasses." AND Semester == %s ",$data['SEM']);
+}
 if($data['IID'] != -1){
 	$getClasses = sprintf($getClasses." AND c.iid == %s ",$data['IID']);
 }else if($data['IID'] == -1 && $data['INSTRUCTOR'] != ""){

@@ -1,20 +1,20 @@
 /**Global gauge object*/
 var gage = new JustGage({
-	id:'avggpagage',
-        value:0.0,
-	min:0.0,
-	max:4.0,
-	title:'Average Gpa',
-	levelColorsGradient: false,
-	levelColors: [ "#FF1100", "#EEFF00", "#11FF00"],
-	counter: true,
-	label: 'GPA'
+    id:'avggpagage',
+    value:0.0,
+    min:0.0,
+    max:4.0,
+    title:'Average Gpa',
+    levelColorsGradient: false,
+    levelColors: [ "#FF1100", "#EEFF00", "#11FF00"],
+    counter: true,
+    label: 'GPA'
 });
 
 /**Container to hold the rdata*/
 var data = {
-	manager : new GradeDist(),
-	gage    : gage	
+    manager : new GradeDist(),
+    gage    : gage	
 };
 
 
@@ -24,7 +24,7 @@ $(document).ready( function(){
     "use strict";
     //Make a call to initialize all form data
     setPageElements();
-
+    
     //Set the form.submit options
     $('#form').submit(function(f){
 	ga('send','event','search');
@@ -32,18 +32,18 @@ $(document).ready( function(){
 	var ids = validateform();
 	if( ids != null) searchandpopulate(ids,data); 
     });
-
+    
     //Set the autocomplete for the department
     $('#dept').autocomplete({
 	source: data.manager.getDeptNames(),
 	delay : 0
     });
-
+    
     //This is the prompt box at the bottom,
     //This line removes the box when it is clicked on
     $('#directions').click(function(){
-		$('#directions').remove();
-		$('#comparebox').css('height',0);
+	$('#directions').remove();
+	$('#comparebox').css('height',0);
     });
     
     //When a key is pressed in the instructor name box
@@ -52,7 +52,7 @@ $(document).ready( function(){
     $('#inst').keyup(function(){
 	var dept = $('#dept').val();
 	var inst = $('#inst').val();
-
+	
 	if((inst.length > 2)){
 	    console.log('Dept is empty');
 	    $('#inst').autocomplete({
@@ -66,11 +66,11 @@ $(document).ready( function(){
 
 /**This method calls the datamanager to get a list of potential matches*/
 function getPartialInst(){
-	var did = data.manager.getDID($('#dept').val());
-	$('#inst').autocomplete({
-		source: (data.manager.getInstPartial($('#inst').val(), did)).slice(0,10),
-		delay: 0
-	});
+    var did = data.manager.getDID($('#dept').val());
+    $('#inst').autocomplete({
+	source: (data.manager.getInstPartial($('#inst').val(), did)).slice(0,10),
+	delay: 0
+    });
 }
 
 /**Initializes the elements on the bar*/
@@ -103,7 +103,7 @@ function validateform(){
     var ids = [];
     ids['iid'] = -1;
     ids['did'] = -1;
-
+    
     if($('#dept').val() != ""){
 	ids['did'] = data.manager.getDID($('#dept').val());
 	//Should not handle wrong department
@@ -115,7 +115,7 @@ function validateform(){
         //Will do best effort for the Instructor ID
 	ids['iid'] = data.manager.getIID($('#inst').val());
     }
-
+    
     return ids;
 }
 
@@ -127,11 +127,12 @@ function searchandpopulate(ids,data){
     years = fetchyears();
     //Get data from the form and send it to the datamanager query function
     result = data.manager.query($('#form').serialize()+
-			    '&from='+years['from']+
-			    '&to='+years['to']+
-			    '&iid='+ids['iid']+
-			    '&did='+ids['did']
-			   );
+				'&from='+years['from']+
+				'&to='+years['to']+
+				'&iid='+ids['iid']+
+				'&did='+ids['did']+
+				'&sem='+$('#sem').val()
+			       );
     var appendthis = '';
     var sumstudents= 0;
     var curgpas = 0;
@@ -142,7 +143,7 @@ function searchandpopulate(ids,data){
     $.each(result, function(index, e){
 	line = processreturnrow(e);	
 	appendthis  += line['appendthis'];
-
+	
 	if(!isNaN(line['weightedavg'])){
 	    sumstudents += line['sumstudents'];
 	    curgpas += line['weightedavg'];
@@ -160,12 +161,12 @@ function searchandpopulate(ids,data){
     var result = (curgpas/((.0+sumstudents))).toFixed(2);
     if(isNaN(result)){result = 0;}
     data.gage.refresh(result);
-
+    
     //Set the actions to be taken on the new class rows we just added
     setclassrows();
     $('#searchresults').trigger('update');
     var data = count+' results';
-
+    
     if(curgpas.length == 500){
 	data = data + ('<br/><em>(500 is the limit, please limit your result)</em>');
     }
@@ -186,6 +187,11 @@ function setclassrows(){
 	    //Get the more detailed information about the class and place it
 	    //Into the bottom bar
 	    $(this).addClass('selected');
+	    var sem = [];
+	    sem['10'] = 'Fall';
+	    sem['20'] = 'Spring';
+	    sem['30'] = 'Summer';
+
 	    $.ajax({
 		type: "POST",
 		url: "php/getGrades.php",
@@ -199,7 +205,7 @@ function setclassrows(){
 			'<td>'+c['number']+'</td>'+
 			'<td>'+c['Section']+'</td>'+
 			'<td>'+c['Year']+'</td>'+
-			'<td>'+c['Semester']+'</td>'+
+			'<td>'+sem[c['Semester']]+'</td>'+
 			'<td>'+c['ap']+'</td>'+
 			'<td>'+c['a']+'</td>'+
 			'<td>'+c['am']+'</td>'+
@@ -213,6 +219,8 @@ function setclassrows(){
 			'<td>'+c['d']+'</td>'+
 			'<td>'+c['dm']+'</td>'+
 			'<td>'+c['f']+'</td>'+
+			'<td>'+c['x']+'</td>'+
+			'<td>'+c['y']+'</td>'+
 			'<td>'+c['w']+'</td>'+
 			'<td>'+c['wp']+'</td>'+
 			'<td>'+c['wf']+'</td>'+
@@ -233,10 +241,10 @@ function setclassrows(){
     });
 }
 
-    
+
 function processreturnrow(e){
     var returnset = [];
-
+    
     var namesh = e['NameShort'];
     var sec = e['Section'];
     var year = e['Year'];
