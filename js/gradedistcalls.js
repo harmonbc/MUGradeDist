@@ -44,42 +44,6 @@ function GradeDist(){
 	return someinst;
     };
 
-    /**Returns a list of all insturctors. Not currently used*/
-    /*this.getAllInst = function(){
-	var allinst = [];
-	$.ajax({
-	    type: urls.t.POST,
-	    url: urls.getInst,
-	    dataType: urls.dt.JSON,
-	    success: function(data){
-		$.each(data, function(index, element){
-		    allinst.push(element.name);
-		});
-	    }
-	});
-	return allinst;
-    };*/
-    
-    /**This returns a list of all instructors in a given department
-     * Not currently used
-     **/
-    /*this.getInstInDept = function(did){
-	var instsindept = [];
-	$.ajax({
-            type: urls.t.GET,
-            url:  urls.getInstInDept,
-            contentType: urls.dt.JSON,
-            data: {dept:did},
-            success: function (insts){
-                $.each(insts, function(index, element){
-                    instsindept.push(element['name']);
-                });
-            }
-        });
-	return instsindept;
-    };*/
-
-    
     /**Given an instructor name, it will return the ID*/
     this.getIID = function(name){
 	var iid = -1;

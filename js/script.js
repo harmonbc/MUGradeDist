@@ -28,6 +28,8 @@ $(document).ready( function(){
     //Set the form.submit options
     $('#form').submit(function(f){
 	ga('send','event','search');
+	//Disable search button during search
+	$('#formsubmit').attr('disabled','disabled');
 	f.preventDefault();
 	var ids = validateform();
 	if( ids != null) searchandpopulate(ids,data); 
@@ -172,6 +174,8 @@ function searchandpopulate(ids,data){
     }
     //Let the user know how many results came back
     $('#resultcount').html(data);
+    //Reenable search
+    $('#formsubmit').removeAttr('disabled');
 }
 
 /**Adds action to class row*/
