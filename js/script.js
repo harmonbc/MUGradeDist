@@ -188,13 +188,19 @@ function setclassrows(){
 	    $('#comp'+this.id).remove();
            $('#searchresults').css('margin-bottom', function (index, curValue) {
                  return parseInt(curValue, 10) - 20 + 'px';
-             });
+            });
+	    $(this).find('td').each(function(){
+                $(this).css('background-color','#FFFFFF');
+            });
 
 	}else{
 	    ga('send','event','compare','add','frommain');
             $('#searchresults').css('margin-bottom', function (index, curValue) {
                  return parseInt(curValue, 10) + 20 + 'px';
-             });	    
+             });
+	    $(this).find('td').each(function(){
+		$(this).css('background-color','#C8C8C8');
+		});	    
 	    //Get the more detailed information about the class and place it
 	    //Into the bottom bar
 	    $(this).addClass('selected');
@@ -203,7 +209,7 @@ function setclassrows(){
 	    sem['20'] = 'Spring';
 	    sem['30'] = 'Summer';
 
-	    $.ajax({
+	   $.ajax({
 		type: "POST",
 		url: "php/getGrades.php",
 		data: "cid="+$(this).attr('id'),
@@ -243,9 +249,12 @@ function setclassrows(){
 		    $('#comp'+c['cid']).click(function(){
 			$('#'+this.id.substring(4)).removeClass('selected');
 			$(this).remove();
-                     $('#searchresults').css('margin-bottom', function (index, curValue) {
-                 return parseInt(curValue, 10) - 20 + 'px';
-             });
+			$('#'+this.id.substring(4)).find('td').each(function(){
+                		$(this).css('background-color','#FFFFFF');
+                        });
+	                $('#searchresults').css('margin-bottom', function (index, curValue) {
+                 		return parseInt(curValue, 10) + 20 + 'px';
+                        });
 
 			ga('send','event','compare','remove','frombottom');
 		    });
