@@ -24,7 +24,7 @@ $(document).ready( function(){
     "use strict";
     //Make a call to initialize all form data
     setPageElements();
-    
+    console.log("Loading Page");    
     //Set the form.submit options
     $('#form').submit(function(f){
 	ga('send','event','search');
@@ -133,7 +133,8 @@ function searchandpopulate(ids,data){
 				'&to='+years['to']+
 				'&iid='+ids['iid']+
 				'&did='+ids['did']+
-				'&sem='+$('#sem').val()
+				'&sem='+$('#sem').val()+
+				'&loc='+$('#campus').val()
 			       );
     var appendthis = '';
     var sumstudents= 0;
@@ -252,8 +253,9 @@ function setclassrows(){
 			$('#'+this.id.substring(4)).find('td').each(function(){
                 		$(this).css('background-color','#FFFFFF');
                         });
+
 	                $('#searchresults').css('margin-bottom', function (index, curValue) {
-                 		return parseInt(curValue, 10) + 20 + 'px';
+                 		return parseInt(curValue, 10) - 20 + 'px';
                         });
 
 			ga('send','event','compare','remove','frombottom');
@@ -290,6 +292,7 @@ function processreturnrow(e){
 	e['number']+'</td><td>'+
 	e['Section']+'</td><td>'+
 	e['Year']+'</td><td>'+
+	e['campus']+'</td><td>'+
 	e['name']+'</td><td>'+
 	e['Title']+'</td><td>'+
 	returnset['avggpa']+'</td><td>'+

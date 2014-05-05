@@ -11,7 +11,8 @@ $data = array(
                 "TO_YEAR"=>$_GET['to'],
 		"DID"=>$_GET['did'],
 		"IID"=>$_GET['iid'],
-		"SEM"=>$_GET['sem']
+		"SEM"=>$_GET['sem'],
+		"LOC"=>$_GET['loc']
         );
 
 $getClasses = sprintf("SELECT D.NameShort, I.iid, I.name, C.*, G.avggpa, G.finished FROM 
@@ -20,7 +21,9 @@ $getClasses = sprintf("SELECT D.NameShort, I.iid, I.name, C.*, G.avggpa, G.finis
                   instructors AS i on i.iid = c.iid JOIN
                   grades as g on g.cid = c.cid
                   WHERE year >= %s ", $data['FROM_YEAR']);
-
+if($data['LOC'] != ""){
+  $getClasses = sprintf($getClasses." AND campus like '%s' ",$data['LOC']);
+}
 if($data['SEM'] != ""){
   $getClasses = sprintf($getClasses." AND Semester == %s ",$data['SEM']);
 }

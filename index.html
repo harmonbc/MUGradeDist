@@ -16,7 +16,7 @@
     <!-- header bar that holds contact information -->
     <div id="header">
       <ul>
-	<li><em>Beta Version 0.9</em>
+	<li><em>Beta Version 1.0</em>
       </ul>
     </div>
     <!-- This container holds all content -->
@@ -54,6 +54,18 @@
 		<option value="30">Summer</option>
 	      </select>
 	    </div>
+
+	    <div id="sem-group" class="form-group">
+		<label>Campus</label>
+		<select class="form-control" id="campus">
+			<option value="">ALL</option>
+			<option value="O">Oxford</option>
+			<option value="H">Hamilton</option>
+			<option value="M">Middletown</option>
+			<option value="V">Voice of America</option>
+			<option value="L">Luxembourg</option>
+		</select>
+	    </div>
 	    <!--Slider Bar-->
 	    <div id="rangedval">
 	      Year Range: <span id="from">2007</span> to <span id="to">2014</span>
@@ -71,7 +83,7 @@
  	<!--Container for the search results-->
 	<div id="contents">
 	  <table id="searchresults" class="tablesorter">
-	    <thead><tr><th>Dept</th><th>Class #</th><th>Section</th><th>Year</th><th>Instructor</th>
+	    <thead><tr><th>Dept</th><th>Class #</th><th>Section</th><th>Year</th><th>Campus</th><th>Instructor</th>
 		<th>Title</th><th>Avg Gpa</th></thead>
 	    <tbody>
 	    </tbody>
@@ -109,6 +121,7 @@
       <!--Next 3 scripts are custom made scripts for the project-->
       <script type="text/javascript" src="js/gradedistcalls.js"></script>
       <script type="text/javascript" src="js/script.js"></script>
+
       <!--Google Analytics-->
       <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
