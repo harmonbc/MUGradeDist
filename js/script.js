@@ -185,9 +185,16 @@ function setclassrows(){
 	if($(this).hasClass('selected')){
 	    ga('send','event','compare','remove','frommain');
 	    $(this).removeClass('selected');
-	    $('#comp'+this.id).remove();	
+	    $('#comp'+this.id).remove();
+           $('#searchresults').css('margin-bottom', function (index, curValue) {
+                 return parseInt(curValue, 10) - 20 + 'px';
+             });
+
 	}else{
 	    ga('send','event','compare','add','frommain');
+            $('#searchresults').css('margin-bottom', function (index, curValue) {
+                 return parseInt(curValue, 10) + 20 + 'px';
+             });	    
 	    //Get the more detailed information about the class and place it
 	    //Into the bottom bar
 	    $(this).addClass('selected');
@@ -205,9 +212,8 @@ function setclassrows(){
 		    var c = grades[0];
 		    //make this prettier
 			var details = '<tr id="comp'+c['cid']+'" class="gradecompare">'+
-			'<td>'+c['NameShort']+'</td>'+
-			'<td>'+c['number']+'</td>'+
-			'<td>'+c['Section']+'</td>'+
+			'<td>'+c['NameShort']+' '+c['number']+' '+c['Section']+'</td>'+
+			'<td>'+c['name']+'</td>'+
 			'<td>'+c['Year']+'</td>'+
 			'<td>'+sem[c['Semester']]+'</td>'+
 			'<td>'+c['ap']+'</td>'+
@@ -237,6 +243,10 @@ function setclassrows(){
 		    $('#comp'+c['cid']).click(function(){
 			$('#'+this.id.substring(4)).removeClass('selected');
 			$(this).remove();
+                     $('#searchresults').css('margin-bottom', function (index, curValue) {
+                 return parseInt(curValue, 10) - 20 + 'px';
+             });
+
 			ga('send','event','compare','remove','frombottom');
 		    });
 		}
