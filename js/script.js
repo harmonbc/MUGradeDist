@@ -134,49 +134,51 @@ function searchandpopulate(ids,data){
 				'&iid='+ids['iid']+
 				'&did='+ids['did']+
 				'&sem='+$('#sem').val()+
-				'&loc='+$('#campus').val()
-			       );
+				'&loc='+$('#campus').val());
     var appendthis = '';
     var sumstudents= 0;
     var curgpas = 0;
     var count = 0;
     
-    //For each line, add the appropreate tags, and do the math to calculate
-    //the GPA
-    $.each(result, function(index, e){
-	line = processreturnrow(e);	
-	appendthis  += line['appendthis'];
+    if(typeof result !== 'undefined'){
+	    //For each line, add the appropreate tags, and do the math to calculate
+	    //the GPA
+	    $.each(result, function(index, e){
+		line = processreturnrow(e);	
+		appendthis  += line['appendthis'];
 	
-	if(!isNaN(line['weightedavg'])){
-	    sumstudents += line['sumstudents'];
-	    curgpas += line['weightedavg'];
-	    count += 1;
+		if(!isNaN(line['weightedavg'])){
+		    sumstudents += line['sumstudents'];
+		    curgpas += line['weightedavg'];
+		    count += 1;
+		}
+	    });
+    
+	    var res = $("#searchresults tbody");
+	    //Set the data
+	    res.html("");
+	    res.html(appendthis);
+	    
+	    //Set the data in the result box, and give the gauge the
+	    //new average gpa
+	    var result = (curgpas/((.0+sumstudents))).toFixed(2);
+		    if(isNaN(result)){result = 0;}
+		    data.gage.refresh(result);
+    
+	    //Set the actions to be taken on the new class rows we just added
+	    setclassrows();
+	    $('#searchresults').trigger('update');
+	    var data = count+' results';
+    
+	    if(curgpas.length == 500){
+		data = data + ('<br/><em>(500 is the limit, please limit your result)</em>');
+	    }	
+
+	    //Let the user know how many results came back
+	    $('#resultcount').html(data);
+	    //Reenable search
 	}
-    });
-    
-    var res = $("#searchresults tbody");
-    //Set the data
-    res.html("");
-    res.html(appendthis);
-    
-    //Set the data in the result box, and give the gauge the
-    //new average gpa
-    var result = (curgpas/((.0+sumstudents))).toFixed(2);
-    if(isNaN(result)){result = 0;}
-    data.gage.refresh(result);
-    
-    //Set the actions to be taken on the new class rows we just added
-    setclassrows();
-    $('#searchresults').trigger('update');
-    var data = count+' results';
-    
-    if(curgpas.length == 500){
-	data = data + ('<br/><em>(500 is the limit, please limit your result)</em>');
-    }
-    //Let the user know how many results came back
-    $('#resultcount').html(data);
-    //Reenable search
-    $('#formsubmit').removeAttr('disabled');
+	$('#formsubmit').removeAttr('disabled');
 }
 
 /**Adds action to class row*/
