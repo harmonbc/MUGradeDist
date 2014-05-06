@@ -176,9 +176,13 @@ function searchandpopulate(ids,data){
 
 	    //Let the user know how many results came back
 	    $('#resultcount').html(data);
+	    $('#maincontent').css('position','relative');
+	    $('#topcontent').css('height','100%');
+	    $('#maincontent').css('height','100%');
 	    //Reenable search
 	}
 	$('#formsubmit').removeAttr('disabled');
+	
 }
 
 /**Adds action to class row*/
