@@ -12,3 +12,6 @@ The program needs the following modules installed:
 
 To generate/update the program run the [Python Code](https://github.com/harmonbc/GrdistParser) agasint a folder containing all of the csv's.
 
+Update
+==========
+When adding a new year, upload the folder and change [these js/script.js lines](https://github.com/harmonbc/MUGradeDist/blob/master/js/script.js#L82) to reflect the years that can be searched.
